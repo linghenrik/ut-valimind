@@ -43,7 +43,6 @@ $(document).ready(function(){
 	the_tabs.click(function(e){
 		/* "this" points to the clicked tab hyperlink: */
 		var element = $(this);
-		
 		/* If it is currently active, return false and exit: */
 		if(element.find('#overLine').length) return false;
 		
@@ -52,7 +51,6 @@ $(document).ready(function(){
 
 		/* Removing the line: */
 		$('#overLine').remove();
-		
 		/* Creating a new line with jQuery 1.4 by passing a second parameter: */
 		$('<div>',{
 			id:'overLine',
@@ -83,4 +81,5 @@ $(document).ready(function(){
 	
 	/* Emulating a click on the first tab so that the content area is not empty: */
 	the_tabs.eq(0).click();
+	
 });

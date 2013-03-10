@@ -35,6 +35,7 @@ $(document).ready(function(){
 		
 		/* Adding the tab to the UL container: */
 		$('ul.tabContainerForGuestPage').append(tmp);
+		
 	})
 
 	/* Caching the tabs into a variable for better performance: */

@@ -6,8 +6,7 @@
 <link rel="stylesheet" href="css/print.css" media="print">
 <title>Valimind</title>
 </head>
-<body
-	 class="sisuTaust">
+<body>
 	<header>
 	<nav id="menu">
 		<ul>
@@ -16,9 +15,12 @@
 	</nav>
 	</header>
 	<div class="sisu">
-	
-	<img src="kontuurkaart.jpg"/>
+		<select id="tabelmenu" onchange="valitabel()">
+  			<option value="pie">Pirukatabel</option>
+  			<option value="bar">Pulktabel</option>
+  		</select>
 	</div>
+	<div id='chart' style="width: 900px; height: 500px;"></div>
 	<footer>Copyright ut-valimind 2013</footer>
 </body>
 </html>

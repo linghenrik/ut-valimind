@@ -5,23 +5,33 @@
 <link rel="stylesheet" href="css/style.css"></link>
 <title>Valimind</title>
 </head>
+
 <body
 	class="sisuTaust">
-	<header></header>
-	
-	
+	<header></header>		
 	<div class="sisu">
 		<form>
  		<fieldset>
   		<legend>Kandidatuuri esitamine</legend>
-  		Name: <input type="text"><br>
-  		Erakondlik kuuluvus: <input type="text"><br>
-  		Sünnikuupäev: <input type="text"><br>
-  		Valimispiirkond: <input type="text">
+  		Eesnimi: <input id="nimi" type="text"><br><p id="nimiviga"></p>
+  		Perenimi: <input id="perenimi" type="text"><br><p id="perenimiviga"></p>
+  		Sünnikuupäev: <input id="Bday" type="text"><br><p id="kuuviga"></p> 
+  		Piirkond: <select>
+  			<option value="tartu">Tartu</option>
+  			<option value="saab">Tallinn</option>
+  			<option value="valga">Valga</option>
+  		</select>
+  		Erakond: <select>
+  			<option value="irl">IRL</option>
+  			<option value="reform">Reformierakond</option>
+  			<option value="yksik">�ksikkandidaadid</option>
+  		</select>
+  		
  		</fieldset>
 		</form>
 	</div>
-	<div id="otsus"><a href="#">Esita kandidatuur</a></div>	
+	<button type="button" onclick="KontrolliSisend()">Esita kanditatuur</button>	
 	<footer>Copyright ut-valimind 2013</footer>
+	
 </body>
 </html>

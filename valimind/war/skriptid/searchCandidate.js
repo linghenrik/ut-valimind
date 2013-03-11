@@ -1,99 +1,88 @@
+function getForm(form) {
+	var arr = new Array();
+	var nrSearched = 0;
 
-		var candidateList = "<h3>Kandidaatide nimekiri</h3>";
-		var candidateOne = "<h3>Kandidaadi info</h3>";
-		
-		function getPerson() {
-			$(document).ready(function(){
-				$.getJSON('../json/candidates.json', function(data) {
-					var items = data;
-					var text = "<table class='candidateInfo' border='1'>" +
-						"<tr><th>Isiku (isiku)kood</th><td>" + items.person.id + "</td><tr>" +
-						"<tr><th>Isiku nimi</th><td>" + items.person.name + "</td><tr>" +
-						"<tr><th>Valimisnumber</th><td>" + items.id + "</td><tr>" + 
-						"<tr><th>Erakonna lühend</th><td>" + items.party.id  + "</td><tr>" +
-						"<tr><th>Erakonna nimi</th><td>" + items.party.name  + "</td><tr>" +
-						"<tr><th>Piirkonna lühend</th><td>" + items.region.id + "</td><tr>" +
-						"<tr><th>Piirkonna nimi</th><td>" + items.region.name + "</td><tr>" + "</table>";
-						
-					$('#table_div').html(text);
-				});
-				$('#candHeading').html(candidateOne);
-			});
-		}
+	var name = form.search_name.value;
+	if (name != ""){arr.push("name:" + name); nrSearched += 1;}
 
-		$(document).ready(function(){
-			$.getJSON('../json/findCandidatesByPartyAndRegion.json', function(data) {
-				var items = data;
-				var text = "<table class='candidateTable' border='1'><tr><th>Valimisnumber</th><th>Isikukood</th><th>Nimi</th><th>Piirkonna lühend</th><th>Piirkonna nimi</th></th><th>Erakonna lühend</th><th>Erakonna nimi</th><th></th></tr>";
-				for (var i = 0; i < items.candidates.length; i++) {
-					text += "<tr><td>" + items.candidates[i].id + "</td><td>" + items.candidates[i].person.id + "</td><td>" + items.candidates[i].person.name + 
-						"</td><td>" + items.candidates[i].region.id + "</td><td>" + items.candidates[i].region.name +
-						"</td><td>" + items.candidates[i].party.id + "</td><td>" + items.candidates[i].party.name + "</td><td><button type='button' onclick=getPerson() class='button'>Info</button></tr>";
+	var party = form.search_party.value;
+	if (party != "") {arr.push("party:" + party); nrSearched += 1;}
+
+	var region = form.search_region.value;
+	if (region != "") {arr.push("region:" + region); nrSearched += 1;}
+
+	jQuery("#myTable").empty();
+	jQuery("#kekeke").empty();
+	var gotStuff = 0;
+
+	//currently 1 check per file
+	if (nrSearched == 1 && name != "") {
+		gotStuff = 1;
+		jQuery.getJSON("../json/candidate.json", function(result) {
+			var table_obj = jQuery('#myTable');
+			table_obj.append(jQuery('<tr><td><strong>Erakond</strong></td><td><strong>Piirkond</strong></td><td><strong>Kandidaat</strong></td></tr><tr>'));
+			jQuery.each(result, function(index, item) {
+				if (index != "id") {
+					table_obj.append(jQuery('<td>' + item.name + '</td>'));
 				}
-				text += "</table>";
-				$('#table_div').html(text);
 			});
-			$('#candHeading').html(candidateList);
+			table_obj.append(jQuery('</tr>'));
 		});
+	}
 
-		$(document).ready(function(){
-			$('#candidateForm').submit(function(e) {
-				e.preventDefault();
-				var params = $(this).serialize();
-				//no selection
-				if ((params.indexOf('eesti')) == -1 && (params.indexOf('allParties')) == -1) {
-						$.getJSON('../json/candidate.json', function(data) {
-							var items = data;
-							var text = "<table class='candidateTable' border='1'><tr><th>Valimisnumber</th><th>Isikukood</th><th>Nimi</th><th></th></tr>";
-							for (var i = 0; i < items.candidates.length; i++) {
-								text += "<tr><td>" + items.candidates[i].id + "</td><td>" + items.candidates[i].person.id + "</td><td>" + items.candidates[i].person.name + "</td>" + 
-									"<td><button type='button' onclick=getPerson() class='button'>Info</button></tr>";
-							}
-							text += "</table>"
-							$('#table_div').html(text);
-						});
-						$('#candHeading').html(candidateList);
-					}
-				else if ((params.indexOf('eesti')) == -1 && (params.indexOf('allParties')) != -1){
-						$.getJSON('../json/findCandidatesByParty.json', function(data) {
-							var items = data;
-							var text = "<table class='candidateTable' border='1'><tr><th>Valimisnumber</th><th>Isikukood</th><th>Nimi</th><th>Erakonna lühend</th><th>Erakonna nimi</th><th></th></tr>";
-							for (var i = 0; i < items.candidates.length; i++) {
-								text += "<tr><td>" + items.candidates[i].id + "</td><td>" + items.candidates[i].person.id + "</td><td>" + items.candidates[i].person.name + 
-									"</td><td>" + items.candidates[i].party.id + "</td><td>" + items.candidates[i].party.name + "</td><td><button type='button' onclick=getPerson() class='button'>Info</button></tr>";
-							}
-							text += "</table>"
-							$('#list').html(text);
-						});
-						$('#candHeading').html(candidateList);
-					}
-					//$("#siia").load('findCandidatesByParty.json');
-				else if ((params.indexOf('eesti')) != -1 && (params.indexOf('allParties')) == -1) {
-					$.getJSON('../json/findCandidatesByRegion.json', function(data) {
-						var items = data;
-						var text = "<table class='candidateTable' border='1'><tr><th>Valimisnumber</th><th>Isikukood</th><th>Nimi</th><th>Piirkonna lühend</th><th>Piirkonna nimi</th><th></th></tr>";
-						for (var i = 0; i < items.candidates.length; i++) {
-							text += "<tr><td>" + items.candidates[i].id + "</td><td>" + items.candidates[i].person.id + "</td><td>" + items.candidates[i].person.name + 
-								"</td><td>" + items.candidates[i].region.id + "</td><td>" + items.candidates[i].region.name + "</td><td><button type='button' onclick=getPerson() class='button'>Info</button></tr>";
+	if (nrSearched == 1 && party != "") {
+		gotStuff = 1;
+		jQuery.getJSON("../json/findCandidatesByParty.json", function(result){
+			var table_obj = jQuery('#myTable');
+			table_obj.append(jQuery('<tr><td><strong>Piirkond</strong></td><td><strong>Kandidaat</strong></td></tr>'));
+			jQuery.each(result, function(index, item) {
+				if (index != "id") {
+					jQuery.each(item, function(key, val) {
+						if (key != "id"){
+							table_obj.append(jQuery('<tr><td>' + val.region.name + '</td><td>' + val.person.name + '</td></tr>'));
 						}
-						text += "</table>";
-						$('#table_div').html(text);
 					});
-					$('#candHeading').html(candidateList);
-				}
-				else {
-					$.getJSON('../json/findCandidatesByPartyAndRegion.json', function(data) {
-						var items = data;
-						var text = "<table class='candidateTable' border='1'><tr><th>Valimisnumber</th><th>Isikukood</th><th>Nimi</th><th>Piirkonna lühend</th><th>Piirkonna nimi</th></th><th>Erakonna lühend</th><th>Erakonna nimi</th><th></th></tr>";
-						for (var i = 0; i < items.candidates.length; i++) {
-							text += "<tr><td>" + items.candidates[i].id + "</td><td>" + items.candidates[i].person.id + "</td><td>" + items.candidates[i].person.name + 
-								"</td><td>" + items.candidates[i].region.id + "</td><td>" + items.candidates[i].region.name +
-								"</td><td>" + items.candidates[i].party.id + "</td><td>" + items.candidates[i].party.name + "</td><td><button type='button' onclick=getPerson() class='button'>Info</button></tr>";
-						}
-						text += "</table>";
-						$('#table_div').html(text);
-					});
-					$('#candHeading').html(candidateList);
 				}
 			});
 		});
+	}
+
+	if (nrSearched == 1 && region != "") {
+		gotStuff = 1;
+		jQuery.getJSON("../json/findCandidatesByRegion.json", function(result){
+			var table_obj = jQuery('#myTable');
+			table_obj.append(jQuery('<tr><td><strong>Erakond</strong></td><td><strong>Kandidaat</strong></td></tr>'));
+			jQuery.each(result, function(index, item) {
+				if (index != "id") {
+					jQuery.each(item, function(key, val) {
+						if (key != "id"){
+							table_obj.append(jQuery('<tr><td>' + val.party.name + '</td><td>' + val.person.name + '</td></tr>'));
+						}
+					});
+				}
+			});
+		});
+	}
+
+	if (nrSearched == 2 && region != "" && party != "") {
+		gotStuff = 1;
+		jQuery.getJSON("../json/findCandidatesByPartyAndRegion.json", function(result){
+			var table_obj = jQuery('#myTable');
+			table_obj.append(jQuery('<tr><td><strong>Kandidaat</strong></td></tr>'));
+			jQuery.each(result, function(index, item) {
+				if (index != "id") {
+					jQuery.each(item, function(key, val) {
+						if (key != "id"){
+							table_obj.append(jQuery('<tr><td>' + val.person.name + '</td></tr>'));
+						}
+					});
+				}
+			});
+		});
+	}
+
+	if (gotStuff == 0) {
+		var myDiv = jQuery('#kekeke');
+		myDiv.append(jQuery('<h3>P&auml;ringule vastused puuduvad!</h3>'));
+	}
+}

@@ -15,6 +15,7 @@ function drawTable() {
 	});
 }
 
+
 function valitabel() {
 	var x=document.getElementById("tabelmenu").selectedIndex;
 	if (document.getElementsByTagName("option")[x].value == "bar") {

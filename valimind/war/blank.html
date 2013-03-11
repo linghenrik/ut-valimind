@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+
+<script type="text/javascript">
+
+// Notice!
+// This function is only called if the users browser is Internet Explorer.
+
+/* A observer that reports back */
+var observer = function(){
+	return {
+		gethash:function(){
+			// Call the fixiframe function in the parent window, return this windows location hash.
+			parent.bookmarks.fixiframe(window.location.hash);
+		}
+	};
+}();
+
+/* Begin observer on load */
+window.onload = function(){
+	// Set a interval to keep requesting the gethash function
+	setInterval("observer.gethash()", 400);
+}
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

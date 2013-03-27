@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<servlet>
-		<servlet-name>UTValimind</servlet-name>
-		<servlet-class>valimind.UTValimindServlet</servlet-class>
+		<servlet-name>UTValimindServlet</servlet-name>
+		<servlet-class>utvalimind.servlet.UTValimindServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>UTValimind</servlet-name>
-		<url-pattern>/utvalimind</url-pattern>
+		<servlet-name>UTValimindServlet</servlet-name>
+		<url-pattern>/UTValimindServlet</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Find candidates by Party -->
+	<servlet>
+		<servlet-name>FindByParty</servlet-name>
+		<servlet-class>utvalimind.servlet.FindByParty</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindByParty</servlet-name>
+		<url-pattern>/FindByParty</url-pattern>
+	</servlet-mapping>
+	<!--  End of Party -->
+	<!--  Find by Region -->
+	<servlet>
+		<servlet-name>FindByRegion</servlet-name>
+		<servlet-class>utvalimind.servlet.FindByRegion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindByRegion</servlet-name>
+		<url-pattern>/FindByRegion</url-pattern>
+	</servlet-mapping>
+	<!--  end of Region -->
+	<!-- Find by Name -->
+	<servlet>
+		<servlet-name>FindByName</servlet-name>
+		<servlet-class>utvalimind.servlet.FindByName</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FindByName</servlet-name>
+		<url-pattern>/FindByName</url-pattern>
+	</servlet-mapping>
+	<!-- end of Name  -->
+	<!-- Create new person -->
+	<servlet>
+		<servlet-name>CreateNewIsikServlet</servlet-name>
+		<servlet-class>utvalimind.servlet.CreateNewIsikServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateNewIsikServlet</servlet-name>
+		<url-pattern>/CreateNewIsikServlet</url-pattern>
+	</servlet-mapping>
+	<!-- end person -->
+	<!-- Do voting -->
+	<servlet>
+		<servlet-name>VotingServlet</servlet-name>
+		<servlet-class>utvalimind.servlet.VotingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VotingServlet</servlet-name>
+		<url-pattern>/VotingServlet</url-pattern>
+	</servlet-mapping>
+	<!-- end of voting  -->
+	<!-- Delete vote -->
+	
+	<!-- end of delete -->
+	<!-- Show statisticks -->
+	<servlet>
+		<servlet-name>StatisticServlet</servlet-name>
+		<servlet-class>utvalimind.servlet.StatisticServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StatisticServlet</servlet-name>
+		<url-pattern>/StatisticServlet</url-pattern>
+	</servlet-mapping>
+	<!-- end of stat -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

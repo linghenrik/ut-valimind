@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,9 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Allar
  *
  */
-public class StatisticServlet {
+@SuppressWarnings("serial")
+public class StatisticServlet extends HttpServlet {
 	Gson gson=new Gson();
 	Connection conn=null;
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException{
 		Statement stmt = null;

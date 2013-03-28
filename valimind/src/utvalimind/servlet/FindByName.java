@@ -10,19 +10,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /* This is servlet for finding our candidates by name fields
  *  it uses surename and givenname
  */
-public class FindByName {
+@SuppressWarnings("serial")
+public class FindByName extends HttpServlet {
 	private String givenName;
 	private String sureName;
-	Gson gson=new Gson();
 	
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
+			Gson gson=new Gson();
 			givenName=req.getParameter("eesnimi");
 			sureName=req.getParameter("perenimi");
 			boolean proceed=false;

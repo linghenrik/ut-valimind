@@ -15,10 +15,13 @@ function KontrolliSisend()
 			error2 = true
 		} if (!error1){
 			document.getElementById("nimiviga").innerHTML="";
+			document.getElementById("nimi").backgroundColor="white";
 		} if (!error2){
 			document.getElementById("perenimiviga").innerHTML="";
+			document.getElementById("perenimi").backgroundColor="white";
 		} if (checkdate(document.getElementById("Bday"))){
 			document.getElementById("kuuviga").innerHTML="";
+			document.getElementById("Bday").backgroundColor="white";
 		} if (checkdate(document.getElementById("Bday")) == true && lisa == true) {
 		alert('Teie kanditatuur on edukalt lisatud');
 		document.getElementById("nimi").style.backgroundColor="white";

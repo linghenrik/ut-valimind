@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UTValimindServlet{
+@SuppressWarnings("serial")
+public class UTValimindServlet extends HttpServlet{
 /*!This servlet does insert into evalmised db into table Kandidaat
 	and also returns full list of Candidates
 	*/
+	@Override
 public void doPost(HttpServletRequest request, HttpServletResponse response)
 		  throws IOException{
 	PrintWriter out=response.getWriter();
@@ -27,7 +30,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 		conn=DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
 		String nimi=request.getParameter("nimi");
 		String perenimi=request.getParameter("perenimi"); //Insert those two into Isik
-		String dob=request.getParameter("dob");
+		String dob=request.getParameter("Bday");
 		String piirkond=request.getParameter("piirkond");
 		String erakond=request.getParameter("erakond");
 		if(nimi=="" || perenimi=="" || dob=="" || piirkond=="" || erakond==""){
@@ -40,8 +43,6 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 			sql="insert into Kandidaat(Partei,Regioon,Isik) select Partei.Id,Regioon.Id,Isik.Id from Partei,Regioon,Isik where Partei.Id=(select Id from Partei where Nimi="+erakond+") and Regioon.Id=(select Id from Regioon where Nimi="+piirkond+") and Isik.Id=(select Id from Isik where Eesnimi="+nimi+" and Perenimi="+perenimi+")";
 			ps= conn.prepareStatement(sql);
 			stmt=conn.createStatement();
-			
-			
 		}
 	}
 	catch (SQLException e) {
@@ -63,6 +64,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 	}
 	//This method selects human-readble list of candidates for view Valitavad
 	//Valitavad(KandidaadiNr,Eesnimi,Perenimi,DOB,Partei,Piirkond)
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
 		res.setContentType("text/html");

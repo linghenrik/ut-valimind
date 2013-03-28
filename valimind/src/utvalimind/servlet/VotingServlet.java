@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,10 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  * This servlet lets people to vote we preserv their vote into our good 
  * database, it also performs control, if someone has voted already
  * The control is also implemented in DB, with unique keyword
+ * Testing with hardcoded person
  * @author Allar
  *
  */
+@SuppressWarnings("serial")
 public class VotingServlet extends HttpServlet {
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			  throws IOException{
 		PrintWriter out=response.getWriter();
@@ -29,14 +33,15 @@ public class VotingServlet extends HttpServlet {
 		try {
 			DriverManager.registerDriver(new AppEngineDriver());
 			conn=DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-			String nimi =request.getParameter("nimi");
+			String nimi =request.getParameter("kandidaat");
 			String[] nimed=nimi.split(" ");
 			String eesnimi=nimed[0];
 			String perenimi=nimed[1];
 			String piirkond=request.getParameter("piirkond");
 			String erakond=request.getParameter("erakond");
-			long voterId=(Long) null;
-			voterId=Long.parseLong(request.getParameter("ID"));
+			long voterId= (Long)null;
+			//voterId=Long.parseLong(request.getParameter("ID"));
+			voterId=39112122756L;
 			if(eesnimi=="" || perenimi=="" || piirkond=="" || erakond=="" || voterId==(Long)null){
 				out.println("<html><head></head><body>You are missing prameters!Try again!!...</body></html>");
 			}

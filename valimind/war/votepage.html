@@ -8,17 +8,17 @@
 <body>
 	<header></header>
 	
-	
+	<form action="VotingServlet" method="post">
 	<div class="sisu">	
 		<div id="piirkond">
 			<select>
-  			<option value="tartu">Tartu</option>
-  			<option value="saab">Tallinn</option>
-  			<option value="valga">Valga</option>
+  			<option value="tartu">Tartumaa</option>
+  			<option value="saab">Harjumaa</option>
+  			<option value="valga">Valgamaa</option>
   			</select>
   		</div>
   	
-		<div id="enakond"></div>
+		<div id="erakond"></div>
 		<select>
   			<option value="irl">IRL</option>
   			<option value="reform">Reformierakond</option>
@@ -26,14 +26,14 @@
   			</select>
 		<div id="kandidaat">
 			<select>
-  			<option value="J">Jänes</option>
-  			<option value="R">Orav</option>
-  			<option value="Y">Ka tore tegelane</option>
+  			<option value="J">Teemu Perl</option>
+  			<option value="R">Peeter Python</option>
   			</select></div>
 	
 				
 	</div>
 	<button id="otsus" type="button" onclick="confirmVote()">Kinnita valik</button>
+	</form>
 	<footer>Copyright ut-valimind 2013</footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-function search() {
+/*function search() {
 var selectedArea = $('#areaList').val();
 var searchKeywords = $('#candidateSearchBox').val().toLowerCase();
 createCandidatesTable(selectedArea, searchKeywords);
@@ -43,9 +43,8 @@ table.prependTo("#content");
      }
     });
 }
-
-################################################################s
-/*function getForm(form) {
+*/
+function getForm(form) {
 	var nrSearched=0;
 	var name = form.search_name.value;
 	if (name != ""){ nrSearched += 1;}
@@ -137,4 +136,4 @@ table.prependTo("#content");
 		var myDiv = jQuery('#candHeading');
 		myDiv.append(jQuery('<h3>P&auml;ringule vastused puuduvad!</h3>'));
 	}
-}*/
+}

@@ -23,15 +23,16 @@ import com.google.gson.Gson;
  * It connects with our db and selects suitable candidates
  * 
  */
+@SuppressWarnings("serial")
 public class FindByParty extends HttpServlet {
 	private String partyName;
 	private String candidate;
-	Gson gson= new Gson();
+	
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
-		
+		Gson gson=new Gson();
 		partyName=req.getParameter("partei").trim();
 		boolean proceed= false;
 		if(partyName != null){

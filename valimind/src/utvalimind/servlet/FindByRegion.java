@@ -10,16 +10,19 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FindByRegion {
+@SuppressWarnings("serial")
+public class FindByRegion extends HttpServlet {
 	private String regionName;
 	//private List<T> list=new ArrayList<T>();
-	Gson gson=new Gson();
 	
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
+			Gson gson=new Gson();
 			regionName=req.getParameter("regioon");
 			boolean proceed=false;
 			if(regionName != null){

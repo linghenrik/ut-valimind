@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,15 +18,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 	
 	
-public class CreateNewIsikServlet {
+@SuppressWarnings("serial")
+public class CreateNewIsikServlet extends HttpServlet {
 	
 	private long Id;
 	private String nimi;
 	private String perenimi;
 	DateFormat df = new SimpleDateFormat("yyyy/dd/MM");
 	private Date DOB;
+	@Override
 	public void doPost (HttpServletRequest req, HttpServletResponse resp)
-			  throws IOException, ParseException{
+			  throws IOException{
 		  Connection connection = null;
 		  PrintWriter out=resp.getWriter();
 		    try {
@@ -50,7 +53,10 @@ public class CreateNewIsikServlet {
 	}
 		    catch(SQLException e){
 		    	out.println("<html><head></head><body>Ilmenes viga, see on nüüd küll piinlik.</body></html>");
-		    }
+		    } catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    finally{
 				if(connection != null){
 					try{

@@ -26,3 +26,8 @@ td,th{
 .sisu >img {display:all;max-width: 100%; max-height: 50%;}
 
 #tabelmenu{display:none;}
+
+#cart{
+	width:100%;
+	heigth:100%;
+}

@@ -15,13 +15,13 @@ function KontrolliSisend()
 			error2 = true
 		} if (!error1){
 			document.getElementById("nimiviga").innerHTML="";
-			document.getElementById("nimi").backgroundColor="white";
+			document.getElementById("nimi").style.backgroundColor="white";
 		} if (!error2){
 			document.getElementById("perenimiviga").innerHTML="";
-			document.getElementById("perenimi").backgroundColor="white";
+			document.getElementById("perenimi").style.backgroundColor="white";
 		} if (checkdate(document.getElementById("Bday"))){
 			document.getElementById("kuuviga").innerHTML="";
-			document.getElementById("Bday").backgroundColor="white";
+			document.getElementById("Bday").style.backgroundColor="white";
 		} if (checkdate(document.getElementById("Bday")) == true && lisa == true) {
 		alert('Teie kanditatuur on edukalt lisatud');
 		document.getElementById("nimi").style.backgroundColor="white";
@@ -47,7 +47,7 @@ document.getElementById("kuuviga").innerHTML="Sisesta korrektne kuupäev"
 else
 returnval=true
 }
-if (returnval==false) input.select()
+if (returnval==false)
 document.getElementById("Bday").style.backgroundColor="#FF6666"
 return returnval
 }

@@ -14,14 +14,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utvalimind.construct.KandidaatByRegion;
+
 @SuppressWarnings("serial")
 public class FindByRegion extends HttpServlet {
-	private String regionName;
+	
 	//private List<T> list=new ArrayList<T>();
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
+		
+			String regionName;
 			Gson gson=new Gson();
 			regionName=req.getParameter("regioon");
 			boolean proceed=false;
@@ -34,19 +38,21 @@ public class FindByRegion extends HttpServlet {
 			Statement stmt = null;
 			ResultSet rs = null;
 			PreparedStatement ps = null;
+			ArrayList<KandidaatByRegion> byRegion=new ArrayList<KandidaatByRegion>();
 			try{
 				DriverManager.registerDriver(new AppEngineDriver());
 				con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
 				stmt=con.createStatement();
 				rs=stmt.executeQuery("select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Regioon=(select Id from Regioon where Nimi='"+regionName+ "') and Kandidaat.Isik=Isik.Id");
-				Collection collection= new ArrayList();
-				collection.add(rs.getObject(1));
-				collection.add(rs.getObject(2));
-				collection.add(rs.getObject(3));
-				collection.add(regionName);
-				gson.toJson(collection);
+				byRegion.add(new KandidaatByRegion(regionName));
+				while(rs.next()){
+					byRegion.add(new KandidaatByRegion(rs.getInt(1),rs.getString(2),rs.getString(3)));
+				}
+				String result=gson.toJson(byRegion);
 				res.setContentType("application/json");
 			    res.setCharacterEncoding("UTF-8");
+			    PrintWriter out=res.getWriter();
+			    out.print(result);
 			}
 			catch(Exception e){
 				e.printStackTrace();

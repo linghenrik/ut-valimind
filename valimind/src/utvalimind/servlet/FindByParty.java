@@ -3,6 +3,7 @@ package utvalimind.servlet;
 import com.google.appengine.api.rdbms.AppEngineDriver;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utvalimind.construct.KandidaatByParty;
+
 import com.google.gson.Gson;
 
 /* This is servlet implementation for finding Candidates by Party
@@ -25,13 +28,11 @@ import com.google.gson.Gson;
  */
 @SuppressWarnings("serial")
 public class FindByParty extends HttpServlet {
-	private String partyName;
-	private String candidate;
-	
-	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
+		String partyName;
+		String candidate;
 		Gson gson=new Gson();
 		partyName=req.getParameter("partei").trim();
 		boolean proceed= false;
@@ -44,19 +45,21 @@ public class FindByParty extends HttpServlet {
 		Statement stmt = null;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
+		ArrayList<KandidaatByParty> someList=new ArrayList<KandidaatByParty>();
 		try{
 			DriverManager.registerDriver(new AppEngineDriver());
 			con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
 			stmt=con.createStatement();
 			rs=stmt.executeQuery("select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Partei=(select Id from Partei where Nimi='"+partyName+ "') and Kandidaat.Isik=Isik.Id" );
-			Collection collection= new ArrayList();
-			collection.add(rs.getObject(1));
-			collection.add(rs.getObject(2));
-			collection.add(rs.getObject(3));
-			collection.add(partyName);
-			gson.toJson(collection);
+			someList.add(new KandidaatByParty(partyName));
+			while(rs.next()){
+				someList.add(new KandidaatByParty(rs.getInt(1),rs.getString(2),rs.getString(3)));
+			}
+			String result=gson.toJson(someList);
 			res.setContentType("application/json");
 		    res.setCharacterEncoding("UTF-8");
+		    PrintWriter out=res.getWriter();
+		    out.print(result);
 		}
 		catch(Exception e){
 			e.printStackTrace();

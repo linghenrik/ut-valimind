@@ -21,14 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class CreateNewIsikServlet extends HttpServlet {
 	
-	private long Id;
-	private String nimi;
-	private String perenimi;
-	DateFormat df = new SimpleDateFormat("yyyy/dd/MM");
-	private Date DOB;
+	
 	@Override
 	public void doPost (HttpServletRequest req, HttpServletResponse resp)
 			  throws IOException{
+		 long Id;
+		 String nimi;
+		 String perenimi;
+		 DateFormat df = new SimpleDateFormat("yyyy/dd/MM");
+		 Date DOB;
 		  Connection connection = null;
 		  PrintWriter out=resp.getWriter();
 		    try {

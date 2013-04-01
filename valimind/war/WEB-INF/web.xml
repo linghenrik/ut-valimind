@@ -59,7 +59,14 @@
 	</servlet-mapping>
 	<!-- end of voting  -->
 	<!-- Delete vote -->
-	
+	<servlet>
+		<servlet-name>DeleteVote</servlet-name>
+		<servlet-class>utvalimind.servlet.DeleteVote</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteVote</servlet-name>
+		<url-pattern>/DeleteVote</url-pattern>
+	</servlet-mapping>
 	<!-- end of delete -->
 	<!-- Show statisticks -->
 	<servlet>

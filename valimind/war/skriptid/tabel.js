@@ -1,14 +1,25 @@
 function drawTable() {
-	$.getJSON('../json/candidates.json', function(data) {
+	
+	while(var i<1000){
+		i=i+1;
+	}
+	$.getJSON('/kandideeri', function(data) {
 	var tabel = new google.visualization.DataTable();       
-	tabel.addColumn('string', 'Nimi');
-	tabel.addColumn('string', 'Erakond');
 	tabel.addColumn('string', 'ID');
+	tabel.addColumn('string', 'eesnimi');
+	tabel.addColumn('string', 'perenimi');
+	tabel.addColumn('string', 'Erakond');
+	tabel.addColumn('string', 'Regioon');
+	tabel.addColumn('string', 'D-O-B');
+	
         
-	for (var i in data.candidates) {        		         
-		tabel.addRow([data.candidates[i].person.name,  
-		data.candidates[i].party.name, 
-		data.candidates[i].id]);}
+	for (var i in data.length-1;i>=0;i--) {        		         
+		tabel.addRow([data[i].id,
+		data[i].firstName,  
+		data[i].lastName, 
+		data[i].party,
+		data[i].area,
+		data[i].dob]);}
           		
 		var erakonnaTabel = new google.visualization.Table(document.getElementById('table_div'));
 		erakonnaTabel.draw(tabel, {showRowNumber: true});

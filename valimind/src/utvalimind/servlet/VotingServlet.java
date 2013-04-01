@@ -41,7 +41,7 @@ public class VotingServlet extends HttpServlet {
 			String erakond=request.getParameter("erakond");
 			long voterId= (Long)null;
 			//voterId=Long.parseLong(request.getParameter("ID"));
-			voterId=39112122756L;
+			voterId=38505214624L;
 			if(eesnimi=="" || perenimi=="" || piirkond=="" || erakond=="" || voterId==(Long)null){
 				out.println("<html><head></head><body>You are missing prameters!Try again!!...</body></html>");
 			}

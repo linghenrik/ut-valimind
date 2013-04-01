@@ -8,32 +8,38 @@
 <body>
 	<header></header>
 	
-	<form action="VotingServlet" method="post">
-	<div class="sisu">	
-		<div id="piirkond">
-			<select>
-  			<option value="tartu">Tartumaa</option>
-  			<option value="saab">Harjumaa</option>
-  			<option value="valga">Valgamaa</option>
+	<div  hidden="false" class="sisu" id="SisuSisu">
+	<form action="VotingServlet" method="post">	
+		<div id="piirkond" >
+			<select name="piirkond">
+  			<option value="Tartumaa">Tartumaa</option>
+  			<option value="Harjumaa">Harjumaa</option>
+  			<option value="Valgamaa">Valgamaa</option>
   			</select>
   		</div>
   	
 		<div id="erakond"></div>
-		<select>
-  			<option value="irl">IRL</option>
-  			<option value="reform">Reformierakond</option>
-  			<option value="yksik">Üksikkandidaadid</option>
+		<select name="erakond">
+  			<option value="IRL">IRL</option>
+  			<option value="Reformierakond">Reformierakond</option>
+  			<option value="Keskerakond">Keskerakond</option>
   			</select>
 		<div id="kandidaat">
-			<select>
-  			<option value="J">Teemu Perl</option>
-  			<option value="R">Peeter Python</option>
+			<select name="kandidaat">
+  			<option value="Teemu Perl">Teemu Perl</option>
+  			<option value="Peeter Python">Peeter Python</option>
   			</select></div>
 	
 				
-	</div>
-	<button id="otsus" type="button" onclick="confirmVote()">Kinnita valik</button>
+	
+	<input  id="otsus" type="submit" value="Kinnita valik" onclick="confirmVote()" >
 	</form>
+	</div>
+	<div class="DeleteVote" id="HiddenSuff" style="display: none">
+	<form action="DeleteVote" method="post">
+	<input id="otsus" type="submit" value="Tühista valik"/>
+	</form>
+	</div>
 	<footer>Copyright ut-valimind 2013</footer>
 </body>
 </html>

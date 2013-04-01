@@ -13,21 +13,21 @@
 		<form action ="kandideeri" method="post">
  		<fieldset>
   		<legend>Kandidatuuri esitamine</legend>
-  		Eesnimi: <input id="nimi" type="text"><br><p id="nimiviga"></p>
-  		Perenimi: <input id="perenimi" type="text"><br><p id="perenimiviga"></p>
-  		Sünnikuupäev: <input id="Bday" type="text"><br><p id="kuuviga"></p> 
-  		Piirkond: <select id="piirkond">
-  			<option value="tartu">Tartu</option>
-  			<option value="saab">Tallinn</option>
-  			<option value="valga">Valga</option>
+  		Eesnimi: <input id="nimi" name="nimi" type="text"><br><p id="nimiviga"></p>
+  		Perenimi: <input id="perenimi" name="perenimi" type="text"><br><p id="perenimiviga"></p>
+  		Sünnikuupäev: <input id="Bday" name="Bday" type="text"><br><p id="kuuviga"></p> 
+  		Piirkond: <select id="piirkond" name="piirkond">
+  			<option value="Tartumaa">Tartumaa</option>
+  			<option value="Harjumaa">Harjumaa</option>
+  			<option value="Valgamaa">Valgamaa</option>
   		</select>
-  		Erakond: <select id="erakond">
-  			<option value="irl">IRL</option>
-  			<option value="reform">Reformierakond</option>
-  			<option value="yksik">�ksikkandidaadid</option>
+  		Erakond: <select id="erakond" name="erakond">
+  			<option value="IRLl">IRL</option>
+  			<option value="Reformierakond">Reformierakond</option>
+  			<option value="Üksikandidaat">�ksikkandidaadid</option>
   		</select>  		
  		</fieldset>
-		<button type="button" onclick="KontrolliSisend()">Esita kanditatuur</button>
+		<input type="submit" onclick="KontrolliSisend()"/>
 		</form>
 	</div>	
 	<footer>Copyright ut-valimind 2013</footer>

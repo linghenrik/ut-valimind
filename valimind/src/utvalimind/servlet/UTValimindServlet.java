@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utvalimind.construct.Kandidaat;
+
 @SuppressWarnings("serial")
 public class UTValimindServlet extends HttpServlet{
-/*!This servlet does insert into evalmised db into table Kandidaat
+/**This servlet does insert into evalmised db into table Kandidaat
 	and also returns full list of Candidates
-	*/
+	**/
 	@Override
 public void doPost(HttpServletRequest request, HttpServletResponse response)
 		  throws IOException{
@@ -73,21 +75,20 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Gson gson=new Gson();
+		ArrayList<Kandidaat> valitavad=new ArrayList<Kandidaat>();
 		try{
 			DriverManager.registerDriver(new AppEngineDriver());
 			con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
 			stmt=con.createStatement();
 			rs=stmt.executeQuery("select * from Valitavad");
-			Collection collection= new ArrayList();
-			collection.add(rs.getObject(1));
-			collection.add(rs.getObject(2));
-			collection.add(rs.getObject(3));
-			collection.add(rs.getObject(4));
-			collection.add(rs.getObject(5));
-			collection.add(rs.getObject(6));
-			gson.toJson(collection);
+			while(rs.next()){
+				valitavad.add(new Kandidaat(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6)) );
+			}
+			String result=gson.toJson(valitavad);
 			res.setContentType("application/json");
 		    res.setCharacterEncoding("UTF-8");
+		    PrintWriter out=res.getWriter();
+		    out.print(result);
 		}
 		catch(Exception e){
 			e.printStackTrace();

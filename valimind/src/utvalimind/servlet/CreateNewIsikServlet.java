@@ -44,12 +44,15 @@ public class CreateNewIsikServlet extends HttpServlet {
 					out.println("<html><head></head><body>You are missing prameters!Try again!!...</body></html>");
 				}
 				else{
-					Statement stmt = null;
 					PreparedStatement ps = null;
 					String sql;
-					sql="insert into Isik(Id,Eesnimi,Perenimi,DOB) values("+Id+","+nimi+","+perenimi+","+DOB+")";
+					sql="insert into Isik(Id,Eesnimi,Perenimi,DOB) values(?,?,?,?);";
 					ps= connection.prepareStatement(sql);
-					stmt=connection.createStatement();
+					ps.setLong(1, Id);
+					ps.setString(2, nimi);
+					ps.setString(3, perenimi);
+					ps.setDate(4, DOB);
+					ps.executeUpdate();
 				}
 	}
 		    catch(SQLException e){

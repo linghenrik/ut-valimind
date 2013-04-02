@@ -39,12 +39,16 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 			out.println("<html><head></head><body>You are missing prameters!Try again!!...</body></html>");
 		}
 		else{
-			Statement stmt = null;
-			PreparedStatement ps = null;
-			String sql;
-			sql="insert into Kandidaat(Partei,Regioon,Isik) select Partei.Id,Regioon.Id,Isik.Id from Partei,Regioon,Isik where Partei.Id=(select Id from Partei where Nimi="+erakond+") and Regioon.Id=(select Id from Regioon where Nimi="+piirkond+") and Isik.Id=(select Id from Isik where Eesnimi="+nimi+" and Perenimi="+perenimi+")";
-			ps= conn.prepareStatement(sql);
-			stmt=conn.createStatement();
+			PreparedStatement stmt = null;
+			String statement = null;
+			
+			statement="insert into Kandidaat(Partei,Regioon,Isik) select Partei.Id,Regioon.Id,Isik.Id from Partei,Regioon,Isik where Partei.Id=(select Id from Partei where Nimi=?) and Regioon.Id=(select Id from Regioon where Nimi=?) and Isik.Id=(select Id from Isik where Eesnimi=? and Perenimi=?);";
+			stmt=conn.prepareStatement(statement);
+			stmt.setString(1, erakond);
+			stmt.setString(2,piirkond);
+			stmt.setString(3, nimi);
+			stmt.setString(4, perenimi);
+			stmt.executeUpdate();
 		}
 	}
 	catch (SQLException e) {
@@ -71,7 +75,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		res.setContentType("text/html");
 		Connection con = null;
-		Statement stmt = null;
+		String lausend = null;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Gson gson=new Gson();
@@ -79,8 +83,9 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 		try{
 			DriverManager.registerDriver(new AppEngineDriver());
 			con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-			stmt=con.createStatement();
-			rs=stmt.executeQuery("select * from Valitavad");
+			lausend="select * from Valitavad;";
+			ps=con.prepareStatement(lausend);
+			rs=ps.executeQuery();
 			while(rs.next()){
 				valitavad.add(new Kandidaat(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6)) );
 			}
@@ -91,7 +96,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 		    out.print(result);
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage(),e);
 		}
 		finally{
 			if(con != null){

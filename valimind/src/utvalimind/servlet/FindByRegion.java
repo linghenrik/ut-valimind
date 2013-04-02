@@ -35,18 +35,20 @@ public class FindByRegion extends HttpServlet {
 				}
 			}
 			Connection con = null;
-			Statement stmt = null;
+			String statement = null;
 			ResultSet rs = null;
-			PreparedStatement ps = null;
+			PreparedStatement stmt = null;
 			ArrayList<KandidaatByRegion> byRegion=new ArrayList<KandidaatByRegion>();
 			try{
 				DriverManager.registerDriver(new AppEngineDriver());
 				con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-				stmt=con.createStatement();
-				rs=stmt.executeQuery("select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Regioon=(select Id from Regioon where Nimi='"+regionName+ "') and Kandidaat.Isik=Isik.Id");
-				byRegion.add(new KandidaatByRegion(regionName));
+				
+				statement="select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Regioon=(select Id from Regioon where Nimi=?) and Kandidaat.Isik=Isik.Id;";
+				stmt=con.prepareStatement(statement);
+				stmt.setString(1, regionName);
+				rs=stmt.executeQuery();
 				while(rs.next()){
-					byRegion.add(new KandidaatByRegion(rs.getInt(1),rs.getString(2),rs.getString(3)));
+					byRegion.add(new KandidaatByRegion(rs.getInt(1),rs.getString(2),rs.getString(3),regionName));
 				}
 				String result=gson.toJson(byRegion);
 				res.setContentType("application/json");

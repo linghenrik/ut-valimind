@@ -84,4 +84,10 @@ $(document).ready(function(){
 	
 	/* Emulating a click on the first tab so that the content area is not empty: */
 	the_tabs.eq(0).click();
+	$(window).bind( 'hashchange', function(e) {
+	    var url = $.param.fragment();
+	    $(".tablayoutbbq .tabs ."+url).click();
+	});
+	 
+	$(window).trigger( 'hashchange' );
 });

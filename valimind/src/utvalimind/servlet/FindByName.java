@@ -40,15 +40,19 @@ public class FindByName extends HttpServlet {
 				}
 			}
 			Connection con = null;
-			Statement stmt = null;
+			String statement;
+			PreparedStatement stmt = null;
 			ResultSet rs = null;
-			PreparedStatement ps = null;
 			ArrayList<Kandidaat> byName=new ArrayList<Kandidaat>();
 			try{
 				DriverManager.registerDriver(new AppEngineDriver());
 				con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-				stmt=con.createStatement();
-				rs=stmt.executeQuery("select Kandidaat.Id, Regioon.Nimi,Partei.Nimi from Kandidaat, Regioon,Partei where Kandidaat.Isik=(select Id from Isik where Eesnimi="+givenName+"and Perenimi="+sureName+") and Kandidaat.Regioon=Regioon.Id and Kandidaat.Partei=Partei.Id");
+				
+				statement="select Kandidaat.Id, Regioon.Nimi,Partei.Nimi from Kandidaat, Regioon,Partei where Kandidaat.Isik=(select Id from Isik where Eesnimi=? and Perenimi=?) and Kandidaat.Regioon=Regioon.Id and Kandidaat.Partei=Partei.Id;";
+				stmt=con.prepareStatement(statement);
+				stmt.setString(1, givenName);
+				stmt.setString(2, sureName);
+				rs=stmt.executeQuery();
 				while(rs.next()){
 					byName.add(new Kandidaat(rs.getInt(1),givenName,sureName,rs.getString(3),rs.getString(2)));
 				}

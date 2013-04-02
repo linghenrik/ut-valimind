@@ -18,7 +18,13 @@
 	<div class="sisu">
 	<img src="kontuurkaart.jpg"/>
 	</div>
-	<div class="tabel">
+	<form action="StatisticServlet" method="get">
+	<input id="otsus" type="submit" value="Kuva tulemused" onclick="drawTulemused()"/>
+	</form>
+	<div id="table_div">
+	
+	</div>
+	<!--div class="tabel">
 		<table class="tulemus">
 			<tr>
 				<td>Nimi</td>
@@ -45,7 +51,7 @@
 				<td>100000</td>
 			</tr>
 		</table>	
-	</div>
+	</div-->
 	<!--<div id="login"><a href="" >login</a></div>-->	
 	
 	<footer>Copyright ut-valimind 2013</footer>

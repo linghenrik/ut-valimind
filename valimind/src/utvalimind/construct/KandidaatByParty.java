@@ -14,4 +14,11 @@ public class KandidaatByParty {
 		this.eesnimi=eesnimi;
 		this.perenimi=perenimi;
 	}
+	public KandidaatByParty(int id, String eesnimi,String perenimi,
+			String erakond){
+		this.id=id;
+		this.eesnimi=eesnimi;
+		this.perenimi=perenimi;
+		this.erakond=erakond;
+	}
 }

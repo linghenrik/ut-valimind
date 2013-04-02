@@ -8,13 +8,13 @@
 <body>
 	<header></header>
 	
-	<div  hidden="false" class="sisu" id="SisuSisu">
+	<div  class="sisu" id="SisuSisu">
 	<form action="VotingServlet" method="post">	
 		<div id="piirkond" >
 			<select name="piirkond">
   			<option value="Tartumaa">Tartumaa</option>
-  			<option value="Harjumaa">Harjumaa</option>
-  			<option value="Valgamaa">Valgamaa</option>
+  			<!--option value="Harjumaa">Harjumaa</option>
+  			<option value="Valgamaa">Valgamaa</option-->
   			</select>
   		</div>
   	
@@ -32,12 +32,12 @@
 	
 				
 	
-	<input  id="otsus" type="submit" value="Kinnita valik" onclick="confirmVote()" >
+	<input  id="otsus1" type="submit" value="Kinnita valik" onclick="confirmVote()" >
 	</form>
 	</div>
-	<div class="DeleteVote" id="HiddenSuff" style="display: none">
+	<div class="DeleteVote" id="HiddenSuff">
 	<form action="DeleteVote" method="post">
-	<input id="otsus" type="submit" value="Tühista valik"/>
+	<input id="otsus2" type="submit" value="Tühista valik" onclick="deleteVote()"/>
 	</form>
 	</div>
 	<footer>Copyright ut-valimind 2013</footer>

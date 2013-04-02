@@ -31,13 +31,12 @@ public class DeleteVote extends HttpServlet {
 		try {
 			DriverManager.registerDriver(new AppEngineDriver());
 			conn=DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-				Statement stmt = null;
 				PreparedStatement ps = null;
 				String sql;
 				
 				sql="delete from Voter where Isik=38505214624";
 				ps= conn.prepareStatement(sql);
-				stmt=conn.createStatement();
+				ps.executeUpdate();
 				
 				
 			

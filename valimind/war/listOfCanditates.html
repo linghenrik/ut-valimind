@@ -9,6 +9,31 @@
 </head>
 <body>
 	<header>
+	
+		<!--this is js stuff, works fine with static div id="searchPanel">
+		<table cellspacing="5" cellpadding="0">
+		<tbody>
+		<tr><td align="left" style="vertical-align: top;">
+		<select class="gwt-ListBox" id="areaList">
+		<option value="--Kõik--">--Kõik--</option>
+		<option value="Tallinn">Tallinn</option>
+		<option value="Tartu">Tartu</option>
+		<option value="Pärnu">Pärnu</option>
+		<option value="Narva">Narva</option>
+		<option value="Viljandi">Viljandi</option>
+		</select></td>
+		<td align="left" style="vertical-align: top;">
+		<input type="text" class="candidateSearchBox" id="candidateSearchBox" onfocus="Otsing()" onblur="self.clearInterval()">
+		</td><td align="left" style="vertical-align: top;">
+		<button type="button" class="gwt-Button searchButton" id="searchButton" onclick="Otsi()">Otsi</button>
+		</td></tr>
+		</tbody></table>
+		</div-->
+		<!-- Some connection with db -->
+		<div class="ui-widget">
+			<label for="tags">AutoComplete otsing: </label>
+			<input id="tags"/>
+		</div>
 		<form action="kandideeri"  method="GET" >
 						<br> <input type="submit" value="Kuva kandidaadid" 
 						onclick=drawTable() />

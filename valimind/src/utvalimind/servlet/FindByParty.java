@@ -32,7 +32,6 @@ public class FindByParty extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException{
 		String partyName;
-		String candidate;
 		Gson gson=new Gson();
 		partyName=req.getParameter("partei").trim();
 		boolean proceed= false;
@@ -42,18 +41,19 @@ public class FindByParty extends HttpServlet {
 			}
 		}
 		Connection con = null;
-		Statement stmt = null;
+		String statement=null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		PreparedStatement ps = null;
 		ArrayList<KandidaatByParty> someList=new ArrayList<KandidaatByParty>();
 		try{
 			DriverManager.registerDriver(new AppEngineDriver());
 			con = DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-			stmt=con.createStatement();
-			rs=stmt.executeQuery("select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Partei=(select Id from Partei where Nimi='"+partyName+ "') and Kandidaat.Isik=Isik.Id" );
-			someList.add(new KandidaatByParty(partyName));
+			statement="select Kandidaat.Id, Eesnimi, Perenimi from Kandidaat, Isik where Kandidaat.Partei=(select Id from Partei where Nimi=?) and Kandidaat.Isik=Isik.Id;";
+			stmt=con.prepareStatement(statement);
+			stmt.setString(1, partyName);
+			rs=stmt.executeQuery();
 			while(rs.next()){
-				someList.add(new KandidaatByParty(rs.getInt(1),rs.getString(2),rs.getString(3)));
+				someList.add(new KandidaatByParty(rs.getInt(1),rs.getString(2),rs.getString(3),partyName));
 			}
 			String result=gson.toJson(someList);
 			res.setContentType("application/json");

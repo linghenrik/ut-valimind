@@ -32,15 +32,15 @@ public class StatisticServlet extends HttpServlet {
 		throws IOException, ServletException{
 		Gson gson=new Gson();
 		Connection conn=null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		PreparedStatement ps = null;
 		ArrayList<Tulemused> someList=new ArrayList<Tulemused>();
 		try{
 		DriverManager.registerDriver(new AppEngineDriver());
 		conn=DriverManager.getConnection("jdbc:google:rdbms://valmindbyut:valimindbyut/evalimised");
-		stmt=conn.createStatement();
-		rs=stmt.executeQuery("select * from LiveTulemused");
+		String statement="select * from LiveTulemused;";
+		stmt=conn.prepareStatement(statement);
+		rs=stmt.executeQuery();
 		while(rs.next()){
 			someList.add(new Tulemused(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
 		}

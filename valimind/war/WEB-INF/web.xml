@@ -78,6 +78,16 @@
 		<url-pattern>/StatisticServlet</url-pattern>
 	</servlet-mapping>
 	<!-- end of stat -->
+	<!-- Do autocomplete -->
+	<servlet>
+		<servlet-name>AutoCompleteServlet</servlet-name>
+		<servlet-class>utvalimind.servlet.AutoCompleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AutoCompleteServlet</servlet-name>
+		<url-pattern>/AutocompleteServlet</url-pattern>
+	</servlet-mapping>
+	<!--  End of Party -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

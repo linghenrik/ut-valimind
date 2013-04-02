@@ -46,18 +46,23 @@ public class VotingServlet extends HttpServlet {
 				out.println("<html><head></head><body>You are missing prameters!Try again!!...</body></html>");
 			}
 			else{
-				Statement stmt = null;
 				PreparedStatement ps = null;
+				PreparedStatement ps1 = null;
 				String sql;
 				String sql1;
 				
-				sql1="insert into Voter(Login,Isik) values(1,"+voterId+ ")";
+				sql1="insert into Voter(Login,Isik) values(1,?);";
 				ps= conn.prepareStatement(sql1);
-				stmt=conn.createStatement();
+				ps.setLong(1,voterId);
+				ps.executeUpdate();
 				
-				sql="insert into Tulemused(Kandidaat,Valimine,Regioon,Voter) select Kandidaat.Id, Valimine.Id,Regioon.Id,Voter.Id from Kandidaat,Valimine,Regioon,Voter,Isik where Kandidaat.Id=(select Id from Kandidaat where Isik=(select Id from Isik where Eesnimi="+eesnimi+" and Perenimi="+perenimi+" )) and Voter.Id=(select Id from Voter where Isik="+voterId+" )  and Regioon.Id=(select Id from Regioon where Nimi="+piirkond+" ) and Valimine.Id=1 ";
-				ps= conn.prepareStatement(sql);
-				stmt=conn.createStatement();
+				sql="insert into Tulemused(Kandidaat,Valimine,Regioon,Voter) select Kandidaat.Id, Valimine.Id,Regioon.Id,Voter.Id from Kandidaat,Valimine,Regioon,Voter,Isik where Kandidaat.Id=(select Id from Kandidaat where Isik=(select Id from Isik where Eesnimi=? and Perenimi=? )) and Voter.Id=(select Id from Voter where Isik=? )  and Regioon.Id=(select Id from Regioon where Nimi=? ) and Valimine.Id=1 ";
+				ps1= conn.prepareStatement(sql);
+				ps1.setString(1,eesnimi);
+				ps1.setString(2, perenimi);
+				ps1.setLong(3, voterId);
+				ps1.setString(4, piirkond);
+				ps1.executeUpdate();
 				
 				
 			}

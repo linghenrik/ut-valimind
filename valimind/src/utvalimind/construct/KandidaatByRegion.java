@@ -11,10 +11,11 @@ public class KandidaatByRegion {
 		this.regioon=regioon;
 	}
 	
-	public KandidaatByRegion(int id, String eesnimi, String perenimi) {
+	public KandidaatByRegion(int id, String eesnimi, String perenimi,String regioon) {
 		super();
 		this.id = id;
 		this.eesnimi = eesnimi;
 		this.perenimi = perenimi;
+		this.regioon=regioon;
 	}
 }

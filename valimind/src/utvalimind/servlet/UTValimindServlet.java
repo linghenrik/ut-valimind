@@ -13,8 +13,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.channel.ChannelMessage;
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
 
 import utvalimind.construct.Kandidaat;
+import utvalimind.helpers.Election;
 
 @SuppressWarnings("serial")
 public class UTValimindServlet extends HttpServlet{
@@ -50,6 +54,15 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 			stmt.setString(4, perenimi);
 			stmt.executeUpdate();
 		}
+		for (String channelKey : Election.areaOrPartyResultsChannelKeys) {
+
+			if (channelKey != null) {
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+
+		      channelService.sendMessage(new ChannelMessage(channelKey, "Hello"));
+			}
+		}
+		out.flush();
 	}
 	catch (SQLException e) {
 		e.printStackTrace();

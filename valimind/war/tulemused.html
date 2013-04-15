@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/style.css"></link>
 <link rel="stylesheet" href="css/print.css" media="print"></link>
+<script type="text/javascript" src="skriptid/drawTulemused.js"></script>
 
 <title>Valimind</title>
 </head>
@@ -19,7 +20,7 @@
 	<img src="kontuurkaart.jpg"/>
 	</div>
 	<form action="StatisticServlet" method="get">
-	<input id="otsus" type="submit" value="Kuva tulemused" onclick="drawTulemused()"/>
+	<input id="otsus" type="button" onclick=drawTulemused() value="Kuva tulemused"/>
 	</form>
 	<div id="table_div">
 		

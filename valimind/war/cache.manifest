@@ -1,0 +1,64 @@
+CACHE MANIFEST
+# rev 1
+#Some apis
+http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js
+http://code.jquery.com/jquery-1.9.1.js
+https://www.google.com/jsapi
+
+#HTML files
+authContainer.html
+esileht.html
+guestContainer.html
+guestEsileht.html
+guestStatistika.html
+guestTulemused.html
+index.html
+kandideeri.html
+kontuurkaart.jpg
+listOfCanditates.html
+login.html
+pealeht.html
+publicListOfCanditates.html
+statistika.html
+tulemused.html
+votepage.html
+
+#CSS files
+css/print.css
+css/style.css
+css/styles.css
+css/styleForGuestPage.css
+
+#Some scripts
+skriptid/alerdid.js
+skriptid/autoCompleteJs.js
+skriptid/drawTulemused.js
+skriptid/findByParty.js
+skriptid/script.js
+skriptid/script1.js
+skriptid/searchByName.js
+skriptid/tabel.js
+
+#IMGs for spinner
+img/ajax_preloader.gif
+img/blue_left.png
+img/blue_mid.png
+img/blue_right.png
+img/green_left.png
+img/green_mid.png
+img/green_right.png
+img/orange_left.png
+img/orange_mid.png
+img/orange_right.png
+img/red_left.png
+img/red_mid.png
+img/red_right.png
+
+#FALLBACK:
+#/ /index.html
+
+#Stuff that we dont need offline
+NETWORK:
+skriptid/confirmVote.js
+skriptid/deleteVote.js
+votepage.html

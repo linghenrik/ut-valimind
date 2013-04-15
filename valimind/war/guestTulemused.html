@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/style.css"></link>
 <link rel="stylesheet" href="css/print.css" media="print"></link>
+<script type="text/javascript" src="skriptid/drawTulemused.js"></script>
 
 <title>Valimind</title>
 </head>
@@ -19,41 +20,11 @@
 	<img src="kontuurkaart.jpg"/>
 	</div>
 	<form action="StatisticServlet" method="get">
-	<input id="otsus" type="submit" value="Kuva tulemused" onclick="drawTulemused()"/>
+	<input id="otsus" type="button"  onclick=drawTulemused() value="Kuva tulemused"/>
 	</form>
 	<div id="table_div">
 	
-	</div>
-	<!--div class="tabel">
-		<table class="tulemus">
-			<tr>
-				<td>Nimi</td>
-				<td>Valimispiirkond</td>
-				<td>Erakond</td>
-				<td>Häälte arv</td>
-			</tr>
-			<tr>
-				<td>Jänes</td>
-				<td>Tartu</td>
-				<td>IRL</td>
-				<td>1234</td>
-			</tr>
-			<tr>
-				<td>Orav</td>
-				<td>Tallinn</td>
-				<td>Reformierakond</td>
-				<td>3245</td>
-			</tr>
-			<tr>
-				<td>Vunts</td>
-				<td>Valga</td>
-				<td>üksikkandidaat</td>
-				<td>100000</td>
-			</tr>
-		</table>	
-	</div-->
-	<!--<div id="login"><a href="" >login</a></div>-->	
-	
+	</div>	
 	<footer>Copyright ut-valimind 2013</footer>
 </body>
 </html>

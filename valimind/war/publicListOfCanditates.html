@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/style.css"></link>
@@ -9,36 +9,31 @@
 </head>
 <body>
 	<header>
-		<form name="kandideeri"  method="GET" >
-						<br> <input type="button" value="Kuva kandidaadidd"
-							onclick=drawTable();
-						/>
+		<!-- Some connection with db -->
+		<div class="ui-widget">
+			<label for="tags">AutoComplete otsing: </label>
+			<input id="tags"/>
+		</div>
+		<form action="kandideeri"  method="GET" >
+						<br> <input type="button" value="Kuva kandidaadid" 
+						onclick=drawTable()>
 		</form>
-		
-		<!--  div id="searchPanel">
-		<table cellspacing="5" cellpadding="0">
-		<tbody>
-		<tr><td align="left" style="vertical-align: top;">
-		<select class="gwt-ListBox" id="areaList">
-		<option value="--Kõik--">--Kõik--</option>
-		<option value="Tallinn">Tallinn</option>
-		<option value="Tartu">Tartu</option>
-		<option value="Pärnu">Pärnu</option>
-		<option value="Narva">Narva</option>
-		<option value="Viljandi">Viljandi</option>
-		</select></td>
-		<td align="left" style="vertical-align: top;">
-		<input type="text" class="candidateSearchBox" id="candidateSearchBox">
-		</td><td align="left" style="vertical-align: top;">
-		<button type="button" class="gwt-Button searchButton" id="searchButton" onclick="search()">Otsi</button>
-		</td></tr>
-		</tbody></table>
-		</div-->
 	</header>
 	<div class="text" id="candHeading">
-	
 	</div>
-	
+	<div class="byName" id="HiddenNameField">
+	<form action="FindByName" method="get">
+	<input id="eesnimi" name="eesnimi" type="text" value="Eesnimi">
+	<input id="perenimi" name="perenimi" type="text" value="Perenimi">
+	<input id="otsus3" type="button" value="Otsi" onclick=findByName()>
+	</form>
+	</div>
+	<div class="byParty" id="HiddenPartyField">
+	<form action="FindByParty" method="get">
+	<input id="partei" name="partei" type="text" value="Partei">
+	<input id="otsus3" type="button" value="Otsi" onclick=findByParty()>
+	</form>
+	</div>
 	<div id="table_div">
 	
 	</div>

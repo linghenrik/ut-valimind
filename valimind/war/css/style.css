@@ -107,6 +107,22 @@ fieldset {display: inline-block;
 	top: 50%;
  
 }
+#otsus3 {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #8cb82b) );
+	background:-moz-linear-gradient( center top, #9dce2c 5%, #8cb82b 100% );
+	background-color:#9dce2c;
+	border:3px solid #83c41a;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial Black;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 30px;
+	text-decoration:none;
+	text-align: center;
+	top: 50%;
+ 
+}
 #otsus2{display:none;}
 #otsus:hover{
 	text-decoration:underline;

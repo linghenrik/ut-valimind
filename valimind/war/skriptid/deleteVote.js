@@ -1,4 +1,6 @@
 function deleteVote(){
+	
+	$.post("/DeleteVote");
 	alert('Teie h‰‰l on edukalt eemaldatud');
 	var toShow=document.getElementById("SisuSisu");
 	var toHide=document.getElementById("HiddenStuff");

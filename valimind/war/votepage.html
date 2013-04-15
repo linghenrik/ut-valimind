@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/style.css"></link>
@@ -12,7 +12,7 @@
 	<form action="VotingServlet" method="post">	
 		<div id="piirkond" >
 			<select name="piirkond">
-  			<option value="Tartumaa">Tartumaa</option>
+  			<option value="Põlvamaa">Tartumaa</option>
   			<!--option value="Harjumaa">Harjumaa</option>
   			<option value="Valgamaa">Valgamaa</option-->
   			</select>
@@ -28,16 +28,17 @@
 			<select name="kandidaat">
   			<option value="Teemu Perl">Teemu Perl</option>
   			<option value="Peeter Python">Peeter Python</option>
+  			<option value="John Java">Teemu Perl</option>
   			</select></div>
 	
 				
 	
-	<input  id="otsus1" type="submit" value="Kinnita valik" onclick="confirmVote()" >
+	<input  id="otsus1" type="button" value="Kinnita valik" onclick=confirmVote() >
 	</form>
 	</div>
 	<div class="DeleteVote" id="HiddenSuff">
 	<form action="DeleteVote" method="post">
-	<input id="otsus2" type="submit" value="Tühista valik" onclick="deleteVote()"/>
+	<input id="otsus2" type="button" value="Tühista valik" onclick=deleteVote()/>
 	</form>
 	</div>
 	<footer>Copyright ut-valimind 2013</footer>

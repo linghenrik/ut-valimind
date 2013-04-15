@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/print.css" media="print">
+<script type="text/javascript" src="skriptid/tabel.js"></script>
+
 <title>Valimind</title>
 </head>
 <body>
@@ -16,8 +18,9 @@
 	</header>
 	<div class="sisu">
 		<select id="tabelmenu" onchange="valitabel()">
-  			<option value="pie">Pirukatabel</option>
-  			<option value="bar">Pulktabel</option>
+  			<option value="pie">Koguriigis</option>
+  			<option value="bar">Piirkonniti</option>
+  			<option value="chart">Erakonniti</option>
   		</select>
 	</div>
 	<div id='chart'></div>

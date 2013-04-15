@@ -1,9 +1,6 @@
 function drawTulemused() {
-	
-	while(var i<10000){
-		i=i+1;
-	}
-	$.getJSON('//StatisticServlet', function(data) {
+	if(navigator.onLine){
+	$.getJSON('/StatisticServlet', function(data) {
 	var tabel = new google.visualization.DataTable();       
 	tabel.addColumn('string', 'ID');
 	tabel.addColumn('string', 'eesnimi');
@@ -13,15 +10,20 @@ function drawTulemused() {
 	tabel.addColumn('string', 'Valimised');
 	
         
-	for (var i in data.length-1;i>=0;i--) {        		         
-		tabel.addRow([data[i].KandidaatId,
+	for (var i=0,len=data.length;i<len;i++) {        		         
+		tabel.addRow([String(data[i].KandidaatId),
 		data[i].nimi,  
 		data[i].perenimi, 
 		data[i].partei,
 		data[i].regioon,
 		data[i].valimised]);}
-          		
+	localStorage.setItem('LiveTulemused',tabel);      		
 		var tulemusedTabel = new google.visualization.Table(document.getElementById('table_div'));
 		tulemusedTabel.draw(tabel, {showRowNumber: false});
-	});
+	});}
+	else{
+		var localToDraw=new google.visualization.Table(document.getElementById('table_div'));
+		localToDraw.draw(localStorage.getItem('LiveTulemused'), {showRowNumber: false});
+	}
+	
 }

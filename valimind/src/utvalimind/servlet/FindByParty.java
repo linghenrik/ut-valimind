@@ -33,7 +33,7 @@ public class FindByParty extends HttpServlet {
 			throws ServletException, IOException{
 		String partyName;
 		Gson gson=new Gson();
-		partyName=req.getParameter("partei").trim();
+		partyName=req.getParameter("partei");
 		boolean proceed= false;
 		if(partyName != null){
 			if(partyName.length()>0){

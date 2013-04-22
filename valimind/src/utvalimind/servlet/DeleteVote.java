@@ -14,11 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.channel.ChannelMessage;
-import com.google.appengine.api.channel.ChannelService;
-import com.google.appengine.api.channel.ChannelServiceFactory;
-import com.google.appengine.api.rdbms.AppEngineDriver;
-import utvalimind.helpers.Election;
 
 /**
  * This servlet lets people to delete their vote
@@ -43,15 +38,7 @@ public class DeleteVote extends HttpServlet {
 				sql="delete from Voter where Isik=38505214624";
 				ps= conn.prepareStatement(sql);
 				ps.executeUpdate();
-				
-				for (String channelKey : Election.generalResultsChannelKeys) {
 
-					if (channelKey != null) {
-					ChannelService channelService = ChannelServiceFactory.getChannelService();
-
-				      channelService.sendMessage(new ChannelMessage(channelKey, "Yello"));
-					}
-				}
 			
 		}
 		catch (SQLException e) {

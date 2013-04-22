@@ -4,19 +4,15 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.appengine.api.channel.ChannelMessage;
-import com.google.appengine.api.channel.ChannelService;
-import com.google.appengine.api.channel.ChannelServiceFactory;
-import utvalimind.helpers.Election;
+
 /**
  * This servlet lets people to vote we preserv their vote into our good 
  * database, it also performs control, if someone has voted already
@@ -66,15 +62,7 @@ public class VotingServlet extends HttpServlet {
 				ps1.setLong(3, voterId);
 				ps1.setString(4, piirkond);
 				ps1.executeUpdate();
-				
-				for (String channelKey : Election.generalResultsChannelKeys) {
-
-					if (channelKey != null) {
-					ChannelService channelService = ChannelServiceFactory.getChannelService();
-
-				      channelService.sendMessage(new ChannelMessage(channelKey, "tere"));
-					}
-				}	
+					
 			}
 		}
 		catch (SQLException e) {

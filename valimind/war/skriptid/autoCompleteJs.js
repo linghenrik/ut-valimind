@@ -4,6 +4,7 @@ $('tags').on(function(){
 			$.getJSON("/AutocompleteServlet", { lastName: request.term }, response);
 	}});
 });
+
 /*$(function() {
 		$( "#tags" ).autocomplete({
 		source: function(request, response) {
